@@ -24,8 +24,3 @@ resource "aws_iam_role_policy_attachments_exclusive" "this" {
   role_name    = aws_iam_role.this.name
   policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess"]
 }
-
-variable "management_account_id" {
-  type        = string
-  description = "The AWS account ID of the management account where the crossplane role is located."
-}
