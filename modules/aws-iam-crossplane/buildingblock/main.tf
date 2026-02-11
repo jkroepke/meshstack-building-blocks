@@ -1,3 +1,21 @@
-output "aws_iam_crossplane" {
-  value = "TODO: AWS IAM Crossplane Building Block"
+resource "aws_iam_role" "this" {
+  name = "crossplane"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow",
+      Principal = {
+        AWS = "arn:aws:iam::${var.management_account_id}:role/crossplane",
+      },
+      Action = [
+        "sts:AssumeRole",
+        "sts:TagSession",
+      ]
+    }]
+  })
+}
+resource "aws_iam_role_policy_attachments_exclusive" "this" {
+  policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess"]
+  role_name   = aws_iam_role.this.name
 }
