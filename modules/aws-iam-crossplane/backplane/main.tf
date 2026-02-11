@@ -10,7 +10,7 @@ resource "aws_iam_role" "this" {
     Statement = [{
       Effect = "Allow",
       Principal = {
-        AWS = "arn:aws:iam::${var.management_account_id}:role/crossplane",
+        AWS = "arn:aws:iam::${var.backplane_management_account_id}:role/crossplane",
       },
       Action = [
         "sts:AssumeRole",
